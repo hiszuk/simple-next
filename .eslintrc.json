@@ -1,0 +1,62 @@
+{
+  "plugins": [ 
+    "strict-dependencies",
+    "unused-imports"
+  ],
+  "extends": [
+    "next/core-web-vitals",
+    "next",
+    "prettier"
+  ],
+  "rules": {
+    "strict-dependencies/strict-dependencies": [
+      "error",
+      [
+        {
+          "module": "src/components/page",
+          "allowReferenceFrom": ["src/pages", "src/components/functional/WithAuth"],
+          "allowSameModule": false
+        },
+        {
+          "module": "src/components/ui",
+          "allowReferenceFrom": ["src/components/**"],
+          "allowSameModule": true
+        }
+      ]
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "object", "type", "index"],
+        "newlines-between": "never",
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": { "order": "asc", "caseInsensitive": true },
+        "pathGroups": [
+          { "pattern": "react**", "group": "builtin", "position": "before" },
+          { "pattern": "next", "group": "builtin", "position": "after" },
+          { "pattern": "next/**", "group": "builtin", "position": "after" },
+          { "pattern": "recoil", "group": "external", "position": "before" },
+          { "pattern": "@mui/**", "group": "external", "position": "before" },
+          { "pattern": "@storybook/**", "group": "external", "position": "before" },
+          { "pattern": "@testing-library/**", "group": "external", "position": "before" },
+          { "pattern": "@/@types/**", "group": "internal", "position": "before" },
+          { "pattern": "@/generated/**", "group": "internal", "position": "before" },
+          { "pattern": "@/components/layout/**", "group": "internal", "position": "before" },
+          { "pattern": "@/components/page/**", "group": "internal", "position": "before" },
+          { "pattern": "@/components/model/**", "group": "internal", "position": "before" },
+          { "pattern": "@/components/ui/**", "group": "internal", "position": "before" },
+          { "pattern": "@/components/**", "group": "internal", "position": "before" },
+          { "pattern": "@/usecases/**", "group": "internal", "position": "before" },
+          { "pattern": "@/repositories/**", "group": "internal", "position": "before" },
+          { "pattern": "@/stores/**", "group": "internal", "position": "before" }
+        ]
+      }
+    ],
+    "no-unused-vars": "off",
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{ "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+		]
+  }
+}
